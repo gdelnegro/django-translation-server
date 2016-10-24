@@ -36,3 +36,5 @@ Quick start
 4. Start the development server and visit http://127.0.0.1:8000/admin/ to create a translation (you'll need the Admin app enabled).
 
 5. Visit http://127.0.0.1:8000/api/translation/ to view all translations
+
+6. Run `python manage.py translate` to apply the basic translations for en-US and pt-BR
