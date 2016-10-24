@@ -5,6 +5,7 @@ from django.utils.translation import to_locale
 from datetime import datetime
 from translation_server.models import Translation
 from django.core.management import call_command
+from django.conf import settings
 import os
 
 
@@ -12,7 +13,7 @@ class Command(BaseCommand):
     help = "This command generates the translation files, based on the contents of 'Translation' model"
     languages_list = None
     locale_path = None
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__)) + "/../../locale"
+    BASE_DIR = os.path.join(settings.BASE_DIR, 'locale')
     file_map = {}
 
     def __create_translation_dirs(self):
