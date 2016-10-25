@@ -3,10 +3,8 @@
 Django translation server
 =====
 
-Polls is a simple Django app to conduct Web-based polls. For each
-question, visitors can choose between a fixed number of answers.
+Django translation server is a simple Django app to manage the project translations.
 
-Detailed documentation is in the "docs" directory.
 
 Requirements
 -----------
@@ -27,11 +25,13 @@ Quick start
 
 2. Include the Translation Server URLconf in your project urls.py like this::
 
-    router = routers.DefaultRouter()
-    router.register(r'translation', translation_server.views.TranslationViewSet)
-    router.register(r'translation_type', translation_server.views.TranslationTypeViewSet)
+    from translation_server import views as translation_server_views
 
-    url(r'^api/last_translation_tag/(?P<tag>\w+)[/]?$', translation_server.views.LastTranslationTagView.as_view(), name='get_last_translation_tag'),
+    router = routers.DefaultRouter()
+    router.register(r'translation', translation_server_views.TranslationViewSet)
+    router.register(r'translation_type', translation_server_views.TranslationTypeViewSet)
+
+    url(r'^api/last_translation_tag/(?P<tag>\w+)[/]?$', translation_server_views.LastTranslationTagView.as_view(), name='get_last_translation_tag'),
 
 
 3. Run `python manage.py makemigrations` and `python manage.py migrate` to create the Translation models, and load the initial data.
