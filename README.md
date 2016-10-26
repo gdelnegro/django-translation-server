@@ -7,6 +7,8 @@ Django translation server is a simple Django app to manage the project translati
 Requirements
 -----------
 
+gettext - https://www.gnu.org/software/gettext/
+
 Django REST framework - http://www.django-rest-framework.org/
 
 django-filter
