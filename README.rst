@@ -5,6 +5,8 @@ Django translation server
 
 Django translation server is a simple Django app to manage the project translations.
 
+Obs: currently this projects only works with PostgreSQL database. Support for others databases will be added in future releases
+
 
 Requirements
 -----------
@@ -12,6 +14,8 @@ Requirements
 Django REST framework - http://www.django-rest-framework.org/
 django-filter
 django-modeltranslation - http://django-modeltranslation.readthedocs.io/en/latest/installation.html#using-pip
+PostgreSQL database - https://www.postgresql.org/
+psycopg2 - https://pypi.python.org/pypi/psycopg2
 
 Quick start
 -----------
