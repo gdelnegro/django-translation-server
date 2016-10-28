@@ -6,6 +6,14 @@ Django translation server is a simple Django app to manage the project translati
 
 Obs: currently this projects only works with PostgreSQL database. Support for others databases will be added in future releases
 
+
+Supported databases
+-------------------
+- [x] PostgreSQL
+- [ ] MySQL
+- [ ] Sqlite
+
+
 Requirements
 -----------
 
