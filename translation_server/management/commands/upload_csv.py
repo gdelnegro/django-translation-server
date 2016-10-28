@@ -38,8 +38,8 @@ class Command(BaseCommand):
         file format:
         header
         Código WMLB|Código WMHT|WMLB EN|WMLB PT|WMHT EN|WMHT PT|Nome do Campo|Tipo do Campo|Contexto|Local de Uso
-        primary_code|auxiliary_code|primary_text_en|primary_text_pt_br|auxiliary_text_en|auxiliary_text_pt_br
-        0|1|2|3|4|5|6
+        primary_tag|auxiliary_tag|text_en|text_pt_br|auxiliary_text_en|auxiliary_text_pt_br|Nome do Campo|Tipo do Campo|Contexto|Local de Uso
+        0|1|2|3|4|5|6|7|8|9
         """
         # valids = re.sub(r"[^A-Za-z]+", '', my_string)
         # todo: extract data from csv
@@ -79,9 +79,9 @@ class Command(BaseCommand):
                         if has_auxiliary_text:
                             params_dict.update({
                                 'auxiliary_tag': row[1],
-                                'auxiliary_text': row[5],
-                                'auxiliary_text_en': row[5],
-                                'auxiliary_text_pt_br': row[6]
+                                'auxiliary_text': row[4],
+                                'auxiliary_text_en': row[4],
+                                'auxiliary_text_pt_br': row[5]
                             })
                         self.__create_record("Translation", **params_dict)
 
