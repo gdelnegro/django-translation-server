@@ -1,17 +1,34 @@
 Django translation server
 =========================
 
-Polls is a simple Django app to conduct Web-based polls. For each
-question, visitors can choose between a fixed number of answers.
+Django translation server is a simple Django app to manage the project translations.
 
-Detailed documentation is in the "docs" directory.
+
+Obs: currently this projects only works with PostgreSQL database. Support for others databases will be added in future releases
+
+
+Supported databases
+-------------------
+- [x] PostgreSQL
+- [ ] MySQL
+- [ ] Sqlite
+
 
 Requirements
 -----------
 
+gettext - https://www.gnu.org/software/gettext/
+
 Django REST framework - http://www.django-rest-framework.org/
+
 django-filter
+
 django-modeltranslation - http://django-modeltranslation.readthedocs.io/en/latest/installation.html#using-pip
+
+PostgreSQL database - https://www.postgresql.org/
+
+psycopg2 - https://pypi.python.org/pypi/psycopg2
+
 
 Quick start
 -----------
@@ -25,11 +42,12 @@ Quick start
 ```
 2. Include the Translation Server URLconf in your project urls.py like this::
 ```
+    from translation_server import views as translation_server_views
     router = routers.DefaultRouter()
-    router.register(r'translation', translation_server.views.TranslationViewSet)    
-    router.register(r'translation_type', translation_server.views.TranslationTypeViewSet)
+    router.register(r'translation', translation_server_views.TranslationViewSet)    
+    router.register(r'translation_type', translation_server_views.TranslationTypeViewSet)
 
-    url(r'^api/last_translation_tag/(?P<tag>\w+)[/]?$', translation_server.views.LastTranslationTagView.as_view(), name='get_last_translation_tag'),
+    url(r'^api/last_translation_tag/(?P<tag>\w+)[/]?$', translation_server_views.LastTranslationTagView.as_view(), name='get_last_translation_tag'),
 ```
 3. Run ```python manage.py makemigraions``` and ```python manage.py migrate``` to create the Translation models, and load the initial data.
 
