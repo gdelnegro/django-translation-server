@@ -1,3 +1,0 @@
-include AUTHORS CHANGES README INSTALL LICENCE
-recursive-include translation_server *.py *.html *.js
-recursive-include docs/source *
