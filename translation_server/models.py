@@ -58,6 +58,7 @@ class LastTranslationTag(object):
     def return_last_tag(self):
         if self.translation_tag and len(self.translation_tag) > 0:
             from django.db import connection
+            # todo: add suport to multiple databases
             query = "SELECT tag FROM %(translation_table)s WHERE tag LIKE '%(translation_tag)s%%' ORDER BY NULLIF(regexp_replace(TAG, E'\\\\D', '', 'g'), '')::int DESC LIMIT 1" % {
                 'translation_tag': self.translation_tag,
                 'translation_table': Translation._meta.db_table
