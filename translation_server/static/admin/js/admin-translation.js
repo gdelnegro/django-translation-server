@@ -19,6 +19,7 @@ document.onreadystatechange = function () {
           protectFields();
           onChangeTranslationType();
           method = "edit";
+          jQuery("#id_type").prop('disabled', true);
       }
   }
 };
@@ -69,10 +70,12 @@ function getTranslationTypeDetails(){
                         jQuery(".field-last_tag").children('div').children('p').text(result.last_tag);
                         if(!jQuery("#id_tag").prop("disabled")){
                             jQuery("#id_tag").val(result.tag + (parseInt(result.last_id)+1));
+                            jQuery(".field-tag").prev().text(result.tag);
                         }
                         if (result.has_auxiliary_text){
                             showFields();
-                            jQuery("#id_auxiliary_tag").val(result.auxiliary_tag+(parseInt(result.last_id)+1))
+                            jQuery("#id_auxiliary_tag").val(result.auxiliary_tag+(parseInt(result.last_id)+1));
+                            jQuery(".field-auxiliary_tag").prev().text(result.auxiliary_tag);
                         }else{
                             hideFields();
                         }
@@ -93,10 +96,12 @@ function getTranslationTypeDetails(){
                             if(Object.keys(result).length > 0){
                                 if(!jQuery("#id_tag").prop("disabled")){
                                     jQuery("#id_tag").val(result.tag + 1);
+                                    jQuery(".field-tag").prev().text(result.tag);
                                 }
                                 if (result.has_auxiliary_text){
                                     showFields();
-                                    jQuery("#id_auxiliary_tag").val(result.auxiliary_tag+1)
+                                    jQuery("#id_auxiliary_tag").val(result.auxiliary_tag+1);
+                                    jQuery(".field-auxiliary_tag").prev().text(result.auxiliary_tag);
                                 }else{
                                     hideFields();
                                 }
