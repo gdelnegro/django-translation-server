@@ -2,10 +2,15 @@
  * Created by gdelnegro on 10/1/16.
  */
 var method = undefined;
+var lastTranslationTagUrl = undefined;
+var translationTypeUrl = undefined;
+
 document.onreadystatechange = function () {
   if (document.readyState === "complete") {
       document.getElementById('id_tag').readOnly = true;
       document.getElementById('id_auxiliary_tag').readOnly = true;
+      translationTypeUrl = document.getElementById('id_translation_type_url').value;
+      lastTranslationTagUrl = document.getElementById('id_last_translation_tag_url').value;
       jQuery(".field-last_tag").children('div').children('p').text("");
       if (document.URL.indexOf("add") > -1){
           method = "add";
@@ -54,7 +59,7 @@ function getTranslationTypeDetails(){
         var flag = false;
         var auxiliary_tag = null;
         jQuery.ajax({
-            url: "/api/last_translation_tag/"+jQuery("#id_type").val(),
+            url: lastTranslationTagUrl+jQuery("#id_type").val(),
             context: document.body,
             async: false,
             success: function (data) {
@@ -80,7 +85,7 @@ function getTranslationTypeDetails(){
                     }
                 }else{
                     jQuery.ajax({
-                        url: "/api/translation_type",
+                        url: translationTypeUrl,
                         data:{id:jQuery("#id_type").val()},
                         async:false,
                         success: function (data){

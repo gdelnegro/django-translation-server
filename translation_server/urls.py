@@ -18,9 +18,10 @@ from translation_server.views import *
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r'translation', TranslationViewSet)
-router.register(r'translation_type', TranslationTypeViewSet)
+router.register(r'translation', TranslationViewSet, 'translations')
+router.register(r'translation_type', TranslationTypeViewSet, 'translations_types')
 
 urlpatterns = [
-    url(r'^api/last_translation_tag/(?P<tag>\w+)[/]?$', LastTranslationTagView.as_view(), name='get_last_translation_tag'),
+    url(r'^api/last_translation_tag/(?P<tag>\w+)[/]?$', LastTranslationTagView.as_view(),
+        name='get_last_translation_tag'),
 ]
