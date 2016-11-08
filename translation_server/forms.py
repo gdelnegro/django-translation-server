@@ -4,10 +4,23 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from translation_server.models import *
+from django.urls import reverse
 
 
 class TranslationAdminForm(forms.ModelForm):
     languages_list = [lang[0].replace('-', '_') for lang in settings.LANGUAGES]
+    translations_url = forms.CharField(max_length=200, widget=forms.HiddenInput())
+    translation_type_url = forms.CharField(max_length=200, widget=forms.HiddenInput())
+    last_translation_tag_url = forms.CharField(max_length=200, widget=forms.HiddenInput())
+
+    def __init__(self, *args, **kwargs):
+        instance = kwargs.get('instance', None)
+        kwargs.update(initial={
+            'translations_url': reverse('api:translations-list'),
+            'translation_type_url': reverse('api:translations_types-list'),
+            'last_translation_tag_url': reverse('get_last_translation_tag', args=[0])[:-1],
+        })
+        super(TranslationAdminForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = super(TranslationAdminForm, self).clean()
