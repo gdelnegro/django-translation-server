@@ -42,8 +42,10 @@ Quick start
 ```
 2. Include the Translation Server URLconf in your project urls.py like this::
 ```
+    from django.conf.urls import url, include
     from rest_framework import routers
     from translation_server import views as translation_server_views
+    
     router = routers.DefaultRouter()
     router.register(r'translation', translation_server_views.TranslationViewSet)    
     router.register(r'translation_type', translation_server_views.TranslationTypeViewSet)
