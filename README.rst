@@ -42,8 +42,8 @@ Quick start
     from translation_server import views as translation_server_views
 
     router = routers.DefaultRouter()
-    router.register(r'translation', TranslationViewSet, 'translations')
-    router.register(r'translation_type', TranslationTypeViewSet, 'translations_types')
+    router.register(r'translation', translation_server_views.TranslationViewSet, 'translations')
+    router.register(r'translation_type', translation_server_views.TranslationTypeViewSet, 'translations_types')
 
     urlpatterns = [
         ...
