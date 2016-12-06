@@ -16,9 +16,9 @@ document.onreadystatechange = function () {
           method = "add";
           document.getElementById("id_type").addEventListener("change", onChangeTranslationType);
       }else if(document.URL.indexOf("change") > -1){
+          method = "edit";
           protectFields();
           onChangeTranslationType();
-          method = "edit";
           jQuery("#id_type").prop('disabled', true);
       }
   }
