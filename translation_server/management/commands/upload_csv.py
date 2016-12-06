@@ -42,15 +42,17 @@ class Command(BaseCommand):
         0|1|2|3|4|5|6|7|8|9
         """
         # valids = re.sub(r"[^A-Za-z]+", '', my_string)
-        # todo: extract data from csv
         # if "código" in line, then it's header, ignore it
         # type = re.sub(r"[^A-Za-z]+", '', line[0])
         # auxiliary_type = re.sub(r"[^A-Za-z]+", '', line[1])
         import sys
         import csv
+
         with open(self.csv_file, 'r') as f:
+            has_auxiliary_text = False
             reader = csv.reader(f)
             for row in reader:
+                # Translation Type
                 if len(row) == 2:
                     translation_type_tag = None
                     auxiliary_translation_type_tag = None
@@ -69,20 +71,29 @@ class Command(BaseCommand):
                                             'name_pt_br': translation_type_tag})
                 else:
                     if "Código" not in row[0] and len(row) > 1:
-                        params_dict = {
-                            'type': re.sub(r"[^A-Za-z]+", '', row[0]),
-                            'tag': row[0],
-                            'text': row[2],
-                            'text_en': row[2],
-                            'text_pt_br': row[3],
-                        }
-                        if has_auxiliary_text:
-                            params_dict.update({
-                                'auxiliary_tag': row[1],
-                                'auxiliary_text': row[4],
-                                'auxiliary_text_en': row[4],
-                                'auxiliary_text_pt_br': row[5]
-                            })
+                        if len(row) == 5:
+                            params_dict = {
+                                'type': re.sub(r"[^A-Za-z]+", '', row[0]),
+                                'tag': row[0],
+                                'text': row[1],
+                                'text_en': row[1],
+                                'text_pt_br': row[2],
+                            }
+                        else:
+                            params_dict = {
+                                'type': re.sub(r"[^A-Za-z]+", '', row[0]),
+                                'tag': row[0],
+                                'text': row[2],
+                                'text_en': row[2],
+                                'text_pt_br': row[3],
+                            }
+                            if has_auxiliary_text:
+                                params_dict.update({
+                                    'auxiliary_tag': row[1],
+                                    'auxiliary_text': row[4],
+                                    'auxiliary_text_en': row[4],
+                                    'auxiliary_text_pt_br': row[5]
+                                })
                         self.__create_record("Translation", **params_dict)
 
     def add_arguments(self, parser):
