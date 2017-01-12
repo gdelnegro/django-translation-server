@@ -3,8 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class TranslationType(models.Model):
-    created_at = models.DateTimeField(_('DTSM1'), auto_now_add=True, null=True, blank=True, help_text=_('DTST1'))
-    updated_at = models.DateTimeField(_('DTSM2'), auto_now=True, null=True, blank=True, help_text=_('DTST2'))
+    created = models.DateTimeField(_('DTSM1'), auto_now_add=True, null=True, blank=True, help_text=_('DTST1'))
+    updated = models.DateTimeField(_('DTSM2'), auto_now=True, null=True, blank=True, help_text=_('DTST2'))
     tag = models.CharField(_('DTSM3'), help_text=_('DTST3'), max_length=20, unique=True)
     name = models.TextField(_('DTSM4'), help_text=_('DTST4'))
     has_auxiliary_text = models.BooleanField(_('DTSM5'), help_text=_('DTST5'), default=True)
@@ -23,8 +23,8 @@ class TranslationType(models.Model):
 
 
 class Translation(models.Model):
-    created_at = models.DateTimeField(_('DTSM1'), auto_now_add=True, null=True, blank=True, help_text=_('DTST1'))
-    updated_at = models.DateTimeField(_('DTSM2'), auto_now=True, null=True, blank=True, help_text=_('DTST2'))
+    created = models.DateTimeField(_('DTSM1'), auto_now_add=True, null=True, blank=True, help_text=_('DTST1'))
+    updated = models.DateTimeField(_('DTSM2'), auto_now=True, null=True, blank=True, help_text=_('DTST2'))
     type = models.ForeignKey(TranslationType, on_delete=None, related_name="translation_translation_type",
                              verbose_name=_('DTSM7'), help_text=_('DTST7'))
     tag = models.CharField(_('DTSM8'), help_text=_('DTST8'), max_length=20, unique=True)
