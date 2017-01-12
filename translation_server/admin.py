@@ -37,7 +37,11 @@ class CustomModelAdminMixin(object):
 
 @admin.register(TranslationType)
 class TranslationTypeAdmin(CustomModelAdminMixin, TabbedTranslationAdmin):
-    pass
+    def get_queryset(self, request):
+        qs = super(TranslationTypeAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.exclude(tag__startswith='DTS')
 
 
 @admin.register(Translation)
@@ -62,4 +66,10 @@ class TranslationAdmin(CustomModelAdminMixin, TabbedTranslationAdmin):
         js = (
             js_dir + '/admin-translation.js',
         )
+
+    def get_queryset(self, request):
+        qs = super(TranslationAdmin, self).get_queryset(request)
+        # if request.user.is_superuser:
+        #     return qs
+        return qs.exclude(tag__startswith='DTS')
 
