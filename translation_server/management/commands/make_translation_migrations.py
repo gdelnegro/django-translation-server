@@ -5,6 +5,7 @@ from django.core.management import BaseCommand
 from django.apps import *
 from datetime import datetime
 from django.core.management import call_command
+from django.conf import settings
 import os
 import glob
 from translation_server.models import Translation
@@ -13,7 +14,7 @@ from translation_server.models import Translation
 class Command(BaseCommand):
     help = "This command generates migrations for translations, based on the contents of 'Translation' model"
     app_name = None
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    BASE_DIR = settings.BASE_DIR
     updated_translations = []
 
     migration_string = """# -*- coding: utf-8 -*-
@@ -99,9 +100,8 @@ class Migration(migrations.Migration):
             translation.save()
 
     def __create_translation_migration(self):
-        """ """
         """ Create an empty migration """
-        migrations_dir = os.path.join(self.BASE_DIR, "../../migrations/")
+        migrations_dir = os.path.join(self.BASE_DIR, self.app_name + "/migrations/")
         dependency_migration = os.path.basename(max(glob.iglob(migrations_dir + '*.py'), key=os.path.getctime)).replace(
             ".py", "")
         """
