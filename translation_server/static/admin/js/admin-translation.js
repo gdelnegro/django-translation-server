@@ -67,6 +67,7 @@ function getTranslationTypeDetails(){
                 if (Object.keys(data.result).length > 0){
                     var result = data.result;
                     if(method == "add"){
+                        result = data[0];
                         jQuery(".field-last_tag").children('div').children('p').text(result.last_tag);
                         if(!jQuery("#id_tag").prop("disabled")){
                             jQuery("#id_tag").val(result.tag + (parseInt(result.last_id)+1));
@@ -92,20 +93,23 @@ function getTranslationTypeDetails(){
                         data:{id:jQuery("#id_type").val()},
                         async:false,
                         success: function (data){
-                            result = data[0]
-                            if(Object.keys(result).length > 0){
-                                if(!jQuery("#id_tag").prop("disabled")){
-                                    jQuery("#id_tag").val(result.tag + 1);
-                                    jQuery(".field-tag").prev().text(result.tag);
-                                }
-                                if (result.has_auxiliary_text){
-                                    showFields();
-                                    jQuery("#id_auxiliary_tag").val(result.auxiliary_tag+1);
-                                    jQuery(".field-auxiliary_tag").prev().text(result.auxiliary_tag);
-                                }else{
-                                    hideFields();
+                            result = (Object.keys(data).indexOf("next") > -1)? result = data['results'][0] : result = data[0];
+                            if(result != undefined){
+                                if(Object.keys(result).length > 0){
+                                    if(!jQuery("#id_tag").prop("disabled")){
+                                        jQuery("#id_tag").val(result.tag + "1");
+                                        jQuery(".field-tag").prev().text(result.tag);
+                                    }
+                                    if (result.has_auxiliary_text){
+                                        showFields();
+                                        jQuery("#id_auxiliary_tag").val(result.auxiliary_tag+1);
+                                        jQuery(".field-auxiliary_tag").prev().text(result.auxiliary_tag);
+                                    }else{
+                                        hideFields();
+                                    }
                                 }
                             }
+
                         }
                     })
                 }
