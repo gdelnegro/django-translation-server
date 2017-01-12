@@ -56,7 +56,7 @@ def load_data(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('%(app_name)s', '%(dependency)s'),
+        %(dependency_string)s
     ]
 
     operations = [
@@ -114,6 +114,11 @@ class Migration(migrations.Migration):
         """ Get last migration name and edit it, adding the new code """
         last_migration_file = max(glob.iglob(migrations_dir + '*.py'), key=os.path.getctime)
         new_lines = self.__create_translation_lines()
+        if len(dependency_migration) > 0:
+            dependency_string = "('%(app_name)s', '%(dependency)s')," % {'app_name': self.app_name,
+                                                                         'dependency': dependency_migration}
+        else:
+            dependency_string = ""
         try:
             if len(new_lines) > 0:
                 with open(last_migration_file, 'w+') as file:
@@ -121,8 +126,8 @@ class Migration(migrations.Migration):
                         'django_version': django.get_version(),
                         'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                         'translation_strings': "\n".join(new_lines),
-                        'dependency': dependency_migration,
                         'tags_to_remove': ", ".join('"{0}"'.format(tag) for tag in self.updated_translations),
+                        'dependency_string': dependency_string,
                         'app_name': self.app_name
                     })
             else:
