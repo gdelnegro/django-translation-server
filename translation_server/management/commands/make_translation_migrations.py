@@ -128,7 +128,7 @@ class Migration(migrations.Migration):
                         'translation_strings': "\n".join(new_lines),
                         'tags_to_remove': ", ".join('"{0}"'.format(tag) for tag in self.updated_translations),
                         'dependency_string': dependency_string,
-                        'app_name': self.app_name
+                        'app_name': 'translation_server'
                     })
             else:
                 os.remove(last_migration_file)
