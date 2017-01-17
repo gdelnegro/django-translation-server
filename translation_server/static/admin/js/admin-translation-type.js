@@ -12,7 +12,7 @@ document.onreadystatechange = function () {
             method = "edit";
         }
         jQuery('#id_has_auxiliary_text').change(function() {
-            if($(this).is(":checked")) {
+            if(jQuery(this).is(":checked")) {
                 showFields();
             }else{
                 hideFields();
