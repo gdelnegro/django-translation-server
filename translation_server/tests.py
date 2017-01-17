@@ -129,7 +129,7 @@ class TestTranslationTypeForm(TestCase):
         """
         the form must be valid without auxiliary tag fields
         """
-        fields_to_ignore = ['id', 'created_at', 'updated_at', 'translation_translation_type']
+        fields_to_ignore = ['id', 'created', 'updated', 'translation_translation_type']
         model_fields = [field.name if field.name not in fields_to_ignore else None for field in
                         apps.get_model('translation_server', "TranslationType")._meta.get_fields()]
         form_data = {}
@@ -150,7 +150,7 @@ class TestTranslationTypeForm(TestCase):
         """
         the form must be valid with auxiliary tag fields
         """
-        fields_to_ignore = ['id', 'created_at', 'updated_at', 'translation_translation_type']
+        fields_to_ignore = ['id', 'created', 'updated', 'translation_translation_type']
         model_fields = [field.name if field.name not in fields_to_ignore else None for field in
                         apps.get_model('translation_server', "TranslationType")._meta.get_fields()]
         form_data = {}
@@ -171,7 +171,7 @@ class TestTranslationTypeForm(TestCase):
 class TestTranslationForm(TestCase):
     def make_form_data(self, translation_type_tag):
         languages_list = [lang[0].replace('-', '_') for lang in settings.LANGUAGES]
-        fields_to_ignore = ['id', 'created_at', 'updated_at', 'translation_translation_type']
+        fields_to_ignore = ['id', 'created', 'updated', 'translation_translation_type']
         model_fields = [field.name if field.name not in fields_to_ignore else None for field in
                         apps.get_model('translation_server', "Translation")._meta.get_fields()]
         form_data = {}

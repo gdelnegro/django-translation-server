@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
 
     def __create_translation_lines(self):
         new_lines = []
-        fields_to_ignore = ['id', 'created_at', 'updated_at']
+        fields_to_ignore = ['id', 'created', 'updated']
         fields_string = ""
         fields_options = {}
         model_fields = [field.name if field.name not in fields_to_ignore else None for field in
