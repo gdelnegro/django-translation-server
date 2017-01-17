@@ -35,8 +35,9 @@ def __create_translation_types(**kwargs):
             translation_type = model()
         except Exception as err:
             raise
-        for k,v in kwargs.items():
-            setattr(translation_type, k, v)
+        for k, v in kwargs.items():
+            if "translation_translation" not in k:
+                setattr(translation_type, k, v)
         translation_type.save()
 
 
