@@ -67,7 +67,9 @@ function getTranslationTypeDetails(){
                 if (Object.keys(data.result).length > 0){
                     var result = data.result;
                     if(method == "add"){
-                        result = data[0];
+                        result = (Object.keys(data).indexOf("result") > -1) ? data['result'] : data[0]
+                        console.log("data", data)
+                        console.log("result", result)
                         jQuery(".field-last_tag").children('div').children('p').text(result.last_tag);
                         if(!jQuery("#id_tag").prop("disabled")){
                             jQuery("#id_tag").val(result.tag + (parseInt(result.last_id)+1));
@@ -93,7 +95,7 @@ function getTranslationTypeDetails(){
                         data:{id:jQuery("#id_type").val()},
                         async:false,
                         success: function (data){
-                            result = (Object.keys(data).indexOf("next") > -1)? result = data['results'][0] : result = data[0];
+                            result = (Object.keys(data).indexOf("next") > -1)? data['results'][0] : data[0];
                             if(result != undefined){
                                 if(Object.keys(result).length > 0){
                                     if(!jQuery("#id_tag").prop("disabled")){
