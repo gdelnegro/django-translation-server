@@ -43,6 +43,13 @@ class TranslationTypeAdmin(CustomModelAdminMixin, TabbedTranslationAdmin):
             return qs
         return qs.exclude(tag__startswith='DTS')
 
+    class Media:
+        import os
+        js_dir = os.path.join(settings.STATIC_URL, 'admin/js')
+        js = (
+            js_dir + '/admin-translation-type.js',
+        )
+
 
 @admin.register(Translation)
 class TranslationAdmin(CustomModelAdminMixin, TabbedTranslationAdmin):
