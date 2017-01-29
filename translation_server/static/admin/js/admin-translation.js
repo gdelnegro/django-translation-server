@@ -19,7 +19,7 @@ document.onreadystatechange = function () {
           method = "edit";
           protectFields();
           onChangeTranslationType();
-          jQuery("#id_type").prop('disabled', true);
+          jQuery("#id_type").prop('readonly', true);
       }
   }
 };
