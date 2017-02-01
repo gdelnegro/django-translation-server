@@ -64,13 +64,14 @@ msgstr ""
                 )
                 for translation in translations:
                     text = getattr(translation, "text_"+language.replace("-", "_"))
-                    self.file_map[language]['file'].write(
-                        'msgid "%(tag)s"\nmsgstr "%(text)s"\n\n' % {
-                            'tag': translation.tag,
-                            'text': text.replace('"', '\\"') if text else ""
-                        }
-                    )
-                    if translation.auxiliary_tag:
+                    if translation.tag != "None" and text != "None":
+                        self.file_map[language]['file'].write(
+                            'msgid "%(tag)s"\nmsgstr "%(text)s"\n\n' % {
+                                'tag': translation.tag,
+                                'text': text.replace('"', '\\"') if text else ""
+                            }
+                        )
+                    if translation.auxiliary_tag and translation.auxiliary_tag != "None":
                         auxiliary_text = getattr(translation, "auxiliary_text_" + language.replace("-", "_"))
                         self.file_map[language]['file'].write(
                             'msgid "%(tag)s"\nmsgstr "%(text)s"\n\n' % {
