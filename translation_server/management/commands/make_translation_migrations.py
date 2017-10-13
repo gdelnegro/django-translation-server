@@ -128,7 +128,7 @@ class Migration(migrations.Migration):
         for translation in Translation.objects.filter(migration_created=False):
             for field in fields_options:
                 value = getattr(translation, field)
-                if type(value) is str:
+                if type(value) is str and value != "None":
                     value = value.replace('"', '\\"') if len(value) > 0 else ""
                 if field == 'type':
                     value = value.tag
